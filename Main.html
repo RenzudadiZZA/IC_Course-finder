@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Course Finder</title>
+    <link rel="stylesheet" href="Main.css">
+</head>
+<body>
+<div class="container">
+    <!-- Header with Logo -->
+    <header class="header">
+        <div class="logo">
+            <img src="New-Brand-logo-.jpg" alt="Imperial Logo" width="200px">
+        </div>
+        <div class="search-bar-top">
+            <input type="text" placeholder="Search" class="search-input-top">
+            <button class="search-button-top">Search</button>
+        </div>
+        <div class="course-fav">
+            <button>My Course List</button>
+        </div>
+        <div class="menu">
+            <button>Menu</button>
+        </div>
+
+    </header>
+
+    <main>
+        <!-- Course Finder Section -->
+        <section class="finder-section">
+            <h1>Find a course</h1>
+            <div class="filter-container">
+                <label for="course-keywords">Enter keywords:</label>
+                <input id="course-keywords" type="text" placeholder="e.g., Software" class="course-input">
+            </div>
+            <div class="filter-container">
+                <label for="course-area">Filter by subject area:</label>
+                <select id="course-area" class="course-level">
+                    <option value="all">All</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="science">Science</option>
+                    <option value="business">Business</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="course-level">Filter by course level:</label>
+                <select id="course-level" class="course-level">
+                    <option value="all">All</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Postgraduate">Postgraduate</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="button-container">
+                <button class="search-button">Search</button>
+                <button class="clear-button">Clear</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <table class="course-table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Course Level</th>
+                    <th>Course Duration</th>
+                    <th>Course Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="#">Software Engineering</a></td>
+                    <td>MSc</td>
+                    <td>1 year</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td><a href="#">Artificial Intelligence</a></td>
+                    <td>MSc</td>
+                    <td>1 year</td>
+                    <td>N/A</td>
+                </tr>
+                <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
