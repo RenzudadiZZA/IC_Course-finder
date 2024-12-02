@@ -7,34 +7,29 @@
     <link rel="stylesheet" href="Home.css">
 </head>
 <body>
-<div class="container">
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <img src="New-Brand-logo-.jpg" alt="Imperial Logo" width="150px">
-        </div>
-    </header>
-
-    <main>
-        <!-- Main Title -->
-        <section class="main-title">
-            <h1>Find a course</h1>
-        </section>
-
-        <!-- Course Categories -->
-        <section class="categories">
-            <div class="category undergraduate">
-                <h2>Undergraduate</h2>
-                <p>Explore our courses for 2025 entry and find information on applying and student finance.</p>
-                <a href="Main.html?level=Undergraduate" class="button">View Undergraduate Courses</a>
-            </div>
-            <div class="category postgraduate">
-                <h2>Postgraduate</h2>
-                <p>Discover our postgraduate taught courses and the learning environment we provide to enhance study.</p>
-                <a href="Main.html?level=Postgraduate" class="button">View Postgraduate Courses</a>
-            </div>
-        </section>
-    </main>
+<div class="logo-container">
+    <img src="New-Brand-logo.png" alt="Imperial Logo" class="imperial-logo">
 </div>
+<div class="container">
+    <!-- Main Title -->
+    <section class="main-title">
+        <h1>Find a module</h1>
+    </section>
+
+    <!-- Search Box -->
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-box" placeholder="Search for modules...">
+            <button id="search-button" class="search-button">Search</button>
+            <div id="recent-searches" class="recent-searches">
+                <p>Software engineering</p>
+                <p>Machine learning</p>
+                <p>Financial</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="Home.js"></script>
 </body>
 </html>
