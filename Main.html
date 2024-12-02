@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Course Finder</title>
+    <title>Imperial Module Finder</title>
     <link rel="stylesheet" href="Main.css">
 </head>
 <body>
@@ -11,14 +11,14 @@
     <!-- Header with Logo -->
     <header class="header">
         <div class="logo">
-            <img src="New-Brand-logo-.jpg" alt="Imperial Logo" width="200px">
+            <img src="New-Brand-logo.png" alt="Imperial Logo" width="300px">
         </div>
         <div class="search-bar-top">
             <input type="text" placeholder="Search" class="search-input-top">
             <button class="search-button-top">Search</button>
         </div>
         <div class="course-fav">
-            <button>My Course List</button>
+            <button id="course-list-button" class="course-list-button">My Course List</button>
         </div>
         <div class="menu">
             <button>Menu</button>
@@ -27,15 +27,16 @@
     </header>
 
     <main>
+
         <!-- Course Finder Section -->
         <section class="finder-section">
-            <h1>Find a course</h1>
+            <h1>Find a Module</h1>
             <div class="filter-container">
-                <label for="course-keywords">Enter keywords:</label>
+                <label for="course-keywords">Search by module name:</label>
                 <input id="course-keywords" type="text" placeholder="e.g., Software" class="course-input">
             </div>
             <div class="filter-container">
-                <label for="course-area">Filter by subject area:</label>
+                <label for="course-area">Filter by department:</label>
                 <select id="course-area" class="course-level">
                     <option value="all">All</option>
                     <option value="engineering">Engineering</option>
@@ -44,18 +45,36 @@
                     <!-- Add more options as needed -->
                 </select>
             </div>
-            <div class="filter-container">
-                <label for="course-level">Filter by course level:</label>
-                <select id="course-level" class="course-level">
-                    <option value="all">All</option>
-                    <option value="Undergraduate">Undergraduate</option>
-                    <option value="Postgraduate">Postgraduate</option>
-                    <!-- Add more options as needed -->
-                </select>
+            <!-- Advanced Filter Button -->
+            <button id="toggle-advanced" class="advanced-button">Show Advanced Filters</button>
+
+            <!-- Advanced Filter Options -->
+            <div id="advanced-filters" class="advanced-filters" style="display: none;">
+                <div class="filter-container">
+                    <label for="course-level">Sort by module level:</label>
+                    <select id="course-level" class="course-level">
+                        <option value="all">All</option>
+                        <option value="First year">First year</option>
+                        <option value="Second year">Second year</option>
+                        <option value="Third year">Third year</option>
+                        <option value="Master">Master</option>
+                    </select>
+                </div>
+                <div class="filter-container">
+                    <label for="term">Sort by term:</label>
+                    <select id="term" class="term-level">
+                        <option value="all">All</option>
+                        <option value="1 term">Spring</option>
+                        <option value="2 terms">Autumn</option>
+                        <option value="Full year">Full year</option>
+                    </select>
+                </div>
             </div>
+
             <div class="button-container">
                 <button class="search-button">Search</button>
                 <button class="clear-button">Clear</button>
+                <button id="advanced-button" class="advanced-button">Search module content</button>
             </div>
         </section>
 
@@ -65,28 +84,70 @@
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Course Level</th>
-                    <th>Course Duration</th>
-                    <th>Course Code</th>
+                    <th>Module Level</th>
+                    <th>Module Duration</th>
+                    <th>Module Code</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td><a href="#">Software Engineering</a></td>
-                    <td>MSc</td>
-                    <td>1 year</td>
-                    <td>N/A</td>
+                    <td><a href="#">Software Engineering for Bioengineers</a></td>
+                    <td>Master/Third year</td>
+                    <td>Autumn</td>
+                    <td>BIOE70071</td>
                 </tr>
                 <tr>
-                    <td><a href="#">Artificial Intelligence</a></td>
-                    <td>MSc</td>
-                    <td>1 year</td>
-                    <td>N/A</td>
+                    <td><a href="#">Introduction to Machine Learning</a></td>
+                    <td>Master</td>
+                    <td>Spring</td>
+                    <td>COMP70050</td>
                 </tr>
+                <tr>
+                    <td><a href="#">Mathematics 2</a></td>
+                    <td>Second year</td>
+                    <td>Autumn,Spring</td>
+                    <td>BIOE50006</td>
                 <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </section>
+        <!-- Add Sidebar Structure -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-content">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <p>Welcome, <span id="user-role"></span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Add My Course List Button -->
+
+        <!-- Sidebar Structure -->
+        <div id="sidebar2" class="sidebar">
+            <div class="sidebar-content">
+                <h2>My Module List</h2>
+                <ul id="course-list-items">
+                    <li>
+                        <a href="#">COMP70010 Deeplearning</a>
+                        <!-- Star button with unique class -->
+                        <button class="star-button">★</button>
+                    </li>
+                    <li>
+                        <a href="#">COMP60010 Machine Learning</a>
+                        <button class="star-button">★</button>
+                    </li>
+                    <!-- Add more modules as needed -->
+                </ul>
+            </div>
+        </div>
+
     </main>
 </div>
 
