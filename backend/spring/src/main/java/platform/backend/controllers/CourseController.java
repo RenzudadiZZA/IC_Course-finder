@@ -27,7 +27,7 @@ public class CourseController {
     }
 
     // Search course by course code
-    @GetMapping("/{courseCode}/basic")
+    @GetMapping("/{courseCode}")
     public Course getCourseByCode(@PathVariable String courseCode) {
         return courseService.getCourseByCode(courseCode);
     }
@@ -36,14 +36,5 @@ public class CourseController {
     @DeleteMapping("/{courseCode}")
     public void deleteCourse(@PathVariable String courseCode) {
         courseService.deleteCourse(courseCode);
-    }
-    // Get detailed course information
-    @GetMapping("/{courseCode}/details")
-    public ResponseEntity<Course> getCourseDetails(@PathVariable String courseCode) {
-        Course course = courseService.getCourseByCode(courseCode);
-        if (course != null) {
-            return ResponseEntity.ok(course);
-        }
-        return ResponseEntity.notFound().build();
     }
 }

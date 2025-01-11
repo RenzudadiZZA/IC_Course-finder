@@ -108,36 +108,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Get all courses from the API and display them in a table
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/api/courses') // Use the API endpoint to fetch courses
-        .then(response => response.json())
-        .then(data => {
-            const courseList = document.getElementById('course-list');
-            courseList.innerHTML = data.map(course => `
-                    <tr>
-                        <td>
-                            <a href="/html/InfoPage.html?courseCode=${course.courseCode}">
-                                ${course.title}
-                            </a>
-                        </td>
-                        <td>${course.level || 'N/A'}</td>
-                        <td>${course.term || 'N/A'}</td>
-                        <td>${course.courseCode}</td>
-                    </tr>
-                `).join('');
-        })
-        .catch(error => console.error('Error fetching courses:', error));
-});
-// 确保页面加载完成后运行代码
-document.addEventListener("DOMContentLoaded", function () {
-    const courseListElement = document.getElementById("course-list");
-
-    const apiEndpoint = "/api/courses";
+    const courseListElement = document.getElementById('course-list');
+    const apiEndpoint = '/api/courses';
 
     fetch(apiEndpoint)
         .then(response => {
             if (!response.ok) {
-                throw new Error("Failed to fetch courses");
+                throw new Error('Failed to fetch courses');
             }
             return response.json();
         })
@@ -145,19 +124,22 @@ document.addEventListener("DOMContentLoaded", function () {
             const rows = data.map(course => `
                 <tr>
                     <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
-                    <td>${course.level || "N/A"}</td>
-                    <td>${course.term || "N/A"}</td>
+                    <td>${course.level || 'N/A'}</td>
+                    <td>${course.term || 'N/A'}</td>
                     <td>${course.courseCode}</td>
                 </tr>
-            `).join("");
+            `).join('');
 
             courseListElement.innerHTML = rows;
         })
         .catch(error => {
-            console.error("Error loading courses:", error);
+            console.error('Error loading courses:', error);
             courseListElement.innerHTML = `<tr><td colspan="4">Failed to load courses. Please try again later.</td></tr>`;
         });
 });
+
+
+// Get single course details from the API and display them on the page
 document.addEventListener("DOMContentLoaded", function () {
     // Get the course code from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -168,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch(`/api/courses/${courseCode}/details`)
+    fetch(`/api/courses/${courseCode}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch course details");
