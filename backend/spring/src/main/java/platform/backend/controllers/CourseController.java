@@ -7,7 +7,7 @@ import platform.backend.entities.Course;
 import platform.backend.services.CourseService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {
