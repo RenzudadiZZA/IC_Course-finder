@@ -26,25 +26,25 @@ public class CourseController {
         return courseService.saveCourse(course);
     }
 
-    // Search course by course code
-    @GetMapping("/{courseCode}/basic")
-    public Course getCourseByCode(@PathVariable String courseCode) {
-        return courseService.getCourseByCode(courseCode);
-    }
-
     // Delete course
     @DeleteMapping("/{courseCode}")
     public void deleteCourse(@PathVariable String courseCode) {
         courseService.deleteCourse(courseCode);
     }
     // Get detailed course information
-    @GetMapping("/{courseCode}/details")
+    @GetMapping("/{courseCode}")
     public ResponseEntity<Course> getCourseDetails(@PathVariable String courseCode) {
         Course course = courseService.getCourseByCode(courseCode);
         if (course != null) {
             return ResponseEntity.ok(course);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    // Get course list for the InfoPage without requiring courseCode
+    @GetMapping("/list")
+    public List<Course> getCourseList() {
+        return courseService.getAllCourses(); // This returns all courses relevant information
     }
 
 }

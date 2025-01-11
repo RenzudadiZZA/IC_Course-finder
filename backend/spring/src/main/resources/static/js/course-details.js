@@ -54,3 +54,35 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html'; // Redirect to course list
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the course code from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseCode = urlParams.get("courseCode");
+
+    if (!courseCode) {
+        alert("No course code provided!");
+        return;
+    }
+
+    fetch(`/api/courses/${courseCode}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch course details");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 更新页面内容
+            document.querySelector("#course-description").textContent = data.description || "N/A";
+            document.querySelector("#course-term").textContent = data.term || "N/A";
+            document.querySelector("#course-learning-outcomes").textContent = data.learningOutcomes || "N/A";
+            document.querySelector("#course-module-content").textContent = data.moduleContent || "N/A";
+            document.querySelector("#course-prerequisites").textContent = data.prerequisites || "N/A";
+            document.querySelector("#course-lecturer").textContent = data.lecturer || "N/A";
+        })
+        .catch(error => {
+            console.error("Error loading course details:", error);
+            alert("Failed to load course details. Please try again later.");
+        });
+});
