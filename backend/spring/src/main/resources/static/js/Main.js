@@ -139,5 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-
-// Get single course details from the API and display them on the page
+// Redirect to Home Page when clicking on the IC logo
+document.addEventListener('DOMContentLoaded', () => {
+    const icLogo = document.getElementById('logo');
+    if (icLogo) {
+        icLogo.addEventListener('click', () => {
+            window.location.href = '../index.html';
+        });
+    }
+});

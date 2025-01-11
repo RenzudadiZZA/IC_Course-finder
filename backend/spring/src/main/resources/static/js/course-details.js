@@ -86,3 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Failed to load course details. Please try again later.");
         });
 });
+// Redirect to Home Page when clicking on back to list button
+document.addEventListener('DOMContentLoaded', () => {
+    const backToListButton = document.getElementById('back-to-list');
+    if (backToListButton) {
+        backToListButton.addEventListener('click', () => {
+            window.location.href = '../html/Main.html';
+        });
+    }
+});
