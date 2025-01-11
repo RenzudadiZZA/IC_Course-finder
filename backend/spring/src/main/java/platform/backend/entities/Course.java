@@ -1,5 +1,6 @@
 package platform.backend.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -9,9 +10,16 @@ public class Course {
     private String courseCode;  // Course Code PK
     private String title;       //
     private String term;        //
+    @Column(columnDefinition = "TEXT")
     private String description; //
+
+    @Column(columnDefinition = "TEXT")
     private String learningOutcomes;
+
+    @Column(columnDefinition = "TEXT")
     private String moduleContent;
+
+    @Column(columnDefinition = "TEXT")
     private String prerequisites;
     private String lecturer;
 
