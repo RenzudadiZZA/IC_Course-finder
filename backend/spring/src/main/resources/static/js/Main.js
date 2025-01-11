@@ -107,3 +107,85 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/courses') // Use the API endpoint to fetch courses
+        .then(response => response.json())
+        .then(data => {
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = data.map(course => `
+                    <tr>
+                        <td>
+                            <a href="/html/InfoPage.html?courseCode=${course.courseCode}">
+                                ${course.title}
+                            </a>
+                        </td>
+                        <td>${course.level || 'N/A'}</td>
+                        <td>${course.term || 'N/A'}</td>
+                        <td>${course.courseCode}</td>
+                    </tr>
+                `).join('');
+        })
+        .catch(error => console.error('Error fetching courses:', error));
+});
+// 确保页面加载完成后运行代码
+document.addEventListener("DOMContentLoaded", function () {
+    const courseListElement = document.getElementById("course-list");
+
+    const apiEndpoint = "/api/courses";
+
+    fetch(apiEndpoint)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch courses");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const rows = data.map(course => `
+                <tr>
+                    <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
+                    <td>${course.level || "N/A"}</td>
+                    <td>${course.term || "N/A"}</td>
+                    <td>${course.courseCode}</td>
+                </tr>
+            `).join("");
+
+            courseListElement.innerHTML = rows;
+        })
+        .catch(error => {
+            console.error("Error loading courses:", error);
+            courseListElement.innerHTML = `<tr><td colspan="4">Failed to load courses. Please try again later.</td></tr>`;
+        });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the course code from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseCode = urlParams.get("courseCode");
+
+    if (!courseCode) {
+        alert("No course code provided!");
+        return;
+    }
+
+    fetch(`/api/courses/${courseCode}/details`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch course details");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 更新页面内容
+            document.querySelector("#course-description").textContent = data.description || "N/A";
+            document.querySelector("#course-term").textContent = data.term || "N/A";
+            document.querySelector("#course-learning-outcomes").textContent = data.learningOutcomes || "N/A";
+            document.querySelector("#course-module-content").textContent = data.moduleContent || "N/A";
+            document.querySelector("#course-prerequisites").textContent = data.prerequisites || "N/A";
+            document.querySelector("#course-lecturer").textContent = data.lecturer || "N/A";
+        })
+        .catch(error => {
+            console.error("Error loading course details:", error);
+            alert("Failed to load course details. Please try again later.");
+        });
+});
