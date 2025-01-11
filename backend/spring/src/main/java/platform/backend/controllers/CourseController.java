@@ -1,12 +1,13 @@
 package platform.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import platform.backend.entities.Course;
 import platform.backend.services.CourseService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {
@@ -26,7 +27,7 @@ public class CourseController {
     }
 
     // Search course by course code
-    @GetMapping("/{courseCode}")
+    @GetMapping("/{courseCode}/basic")
     public Course getCourseByCode(@PathVariable String courseCode) {
         return courseService.getCourseByCode(courseCode);
     }
@@ -35,5 +36,14 @@ public class CourseController {
     @DeleteMapping("/{courseCode}")
     public void deleteCourse(@PathVariable String courseCode) {
         courseService.deleteCourse(courseCode);
+    }
+    // Get detailed course information
+    @GetMapping("/{courseCode}/details")
+    public ResponseEntity<Course> getCourseDetails(@PathVariable String courseCode) {
+        Course course = courseService.getCourseByCode(courseCode);
+        if (course != null) {
+            return ResponseEntity.ok(course);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
