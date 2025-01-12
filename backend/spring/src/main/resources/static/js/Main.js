@@ -93,19 +93,26 @@ document.addEventListener('DOMContentLoaded', () => {
         advancedButton.classList.toggle('active');
     });
 });
-
 document.addEventListener('DOMContentLoaded', function () {
     const courseListButton = document.getElementById('course-list-button');
-    const sidebar2 = document.getElementById('sidebar2');
+    const sidebar2 = document.getElementById('sidebar2'); // Course List Sidebar
+    const menuSidebar = document.getElementById('sidebar'); // Menu Sidebar
 
     courseListButton.addEventListener('click', function (event) {
         event.stopPropagation(); // Prevent the click from propagating to the document
+
+        // Close the menu sidebar if it's open
+        if (menuSidebar.style.width === '250px') {
+            menuSidebar.style.width = '0';
+        }
+
+        // Toggle the course list sidebar
         sidebar2.style.width = sidebar2.style.width === '250px' ? '0' : '250px';
     });
 
     // Hide sidebar2 when clicking outside of it
     document.addEventListener('click', function (event) {
-        if (!sidebar2.contains(event.target) && sidebar2.style.width === '250px') {
+        if (!sidebar2.contains(event.target) && event.target !== courseListButton && sidebar2.style.width === '250px') {
             sidebar2.style.width = '0';
         }
     });
