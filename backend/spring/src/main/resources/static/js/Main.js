@@ -1,22 +1,61 @@
-// Clearing inputs and resetting filters
+// Search function and related interactions
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed'); // Temporary debugging log
+
     const searchButton = document.querySelector('.search-button');
     const clearButton = document.querySelector('.clear-button');
     const keywordInput = document.querySelector('#course-keywords');
-    const areaSelect = document.querySelector('#course-area');
+    const courseListElement = document.getElementById('course-list');
+
+    if (!searchButton || !clearButton || !keywordInput || !courseListElement) {
+        console.error('Required DOM elements not found');
+        return;
+    }
 
     clearButton.addEventListener('click', () => {
         keywordInput.value = '';
-        areaSelect.value = 'all';
+        courseListElement.innerHTML = '';
     });
 
-    // Handle search button click with keyword and area values
     searchButton.addEventListener('click', () => {
-        const keyword = keywordInput.value;
-        const area = areaSelect.value;
-        console.log(`Search for keyword: ${keyword}, area: ${area}`);
+        console.log('Search button clicked'); // 调试按钮点击
+        const keyword = keywordInput.value.trim();
+
+
+        courseListElement.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+        fetch(`/api/courses/search?keywords=${encodeURIComponent(keyword)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Search results:', data); // Temporary debugging log
+
+                if (data.length === 0) {
+                    courseListElement.innerHTML = '<tr><td colspan="4">No courses found.</td></tr>';
+                    return;
+                }
+
+                const rows = data.map(course => `
+                    <tr>
+                        <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
+                        <td>${course.level || 'N/A'}</td>
+                        <td>${course.term || 'N/A'}</td>
+                        <td>${course.courseCode}</td>
+                    </tr>
+                `).join('');
+                courseListElement.innerHTML = rows;
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                courseListElement.innerHTML = '<tr><td colspan="4">Error fetching results. Please try again later.</td></tr>';
+            });
     });
 });
+
 
 // Handle user login state and menu interactions
 document.addEventListener('DOMContentLoaded', function () {
