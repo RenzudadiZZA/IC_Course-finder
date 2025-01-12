@@ -70,7 +70,7 @@ body {
     gap: 10px;
 }
 
-.login-button, .register-button, .logout-button {
+.login-button, .register-button, .logout-button, .close-sidebar {
     padding: 10px 15px;
     font-size: 14px;
     border: 1px solid #0055a6;
@@ -81,7 +81,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.login-button:hover, .register-button:hover, .logout-button:hover {
+.login-button:hover, .register-button:hover, .logout-button:hover, .close-sidebar:hover {
     background-color: #0055a6;
     color: white;
 }
@@ -130,7 +130,7 @@ body {
     font-size: 14px;
 }
 
-.sidebar button {
+.sidebar-button {
     width: 100%;
     padding: 10px;
     background-color: #0055a6;
@@ -141,7 +141,7 @@ body {
     font-size: 16px;
 }
 
-.sidebar button:hover {
+.sidebar-button:hover {
     background-color: #004494;
 }
 

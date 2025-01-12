@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Sidebar and overlay functionality
     const loginButton = document.querySelector('.login-button');
+    const closeButton = document.querySelector('.close-sidebar');
     const registerButton = document.querySelector('.register-button');
     const sidebar = document.getElementById('auth-sidebar');
     const overlay = document.getElementById('sidebar-overlay');
@@ -90,6 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
         authSubmitButton.textContent = 'Register';
     });
 
+    closeButton.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+    });
     overlay.addEventListener('click', () => {
         sidebar.classList.remove('open');
         overlay.classList.remove('show');
@@ -184,7 +189,3 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.reload();
     });
 });
-
-
-
-
