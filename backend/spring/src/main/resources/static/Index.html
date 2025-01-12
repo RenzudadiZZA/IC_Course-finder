@@ -48,11 +48,20 @@
 <!-- Sidebar for Login and Register -->
 <div class="sidebar" id="auth-sidebar">
     <h2 id="sidebar-title">Login</h2>
-    <label for="username">Username:</label>
+    <label for="username" id="username-label">Username:</label>
     <input type="text" id="username" placeholder="Enter your username">
     <label for="password">Password:</label>
     <input type="password" id="password" placeholder="Enter your password">
-    <button id="auth-submit-button">Login</button>
+
+    <!-- checkbox -->
+    <div class="register-options">
+        <label id="register-teacher-label">
+            <input type="checkbox" id="register-as-teacher">
+            <span class="teacher-text">Register as a Teacher</span>
+        </label>
+    </div>
+
+    <button id="auth-submit-button">Register</button>
 </div>
 
 <div class="overlay" id="sidebar-overlay"></div>

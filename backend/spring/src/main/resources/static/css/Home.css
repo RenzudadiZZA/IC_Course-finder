@@ -144,6 +144,19 @@ body {
     background-color: #004494;
 }
 
+#register-teacher-label {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    width: fit-content;
+}
+
+.teacher-text {
+    max-width: 400px;
+    white-space: nowrap;
+    text-align: left;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -205,4 +218,3 @@ body {
 .recently-viewed-list li a:hover {
     text-decoration: underline;
 }
-
