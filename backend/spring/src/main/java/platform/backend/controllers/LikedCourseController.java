@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import platform.backend.entities.Course;
 import platform.backend.entities.LikedCourse;
+import platform.backend.services.CourseService;
 import platform.backend.services.LikedCourseService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/likedcourses")
@@ -15,6 +20,9 @@ public class LikedCourseController {
 
     @Autowired
     private LikedCourseService likedCourseService;
+
+    @Autowired
+    private CourseService courseService;
 
     // Add a course to the user's favorites
     @PostMapping
@@ -47,6 +55,24 @@ public class LikedCourseController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while removing the course.");
         }
+    }
+    @GetMapping("/likedlist/{username}")
+    public ResponseEntity<List<Map<String, String>>> getLikedCoursesSimple(@PathVariable String username) {
+        List<LikedCourse> likedCourses = likedCourseService.getLikedCourses(username);
+
+        List<Map<String, String>> simpleCourses = likedCourses.stream().map(likedCourse -> {
+            Course course = courseService.getCourseByCode(likedCourse.getCourseCode());
+            if (course != null) {
+                Map<String, String> courseDetails = new HashMap<>();
+                courseDetails.put("courseCode", course.getCourseCode());
+                courseDetails.put("title", course.getTitle());
+                return courseDetails;
+            } else {
+                return null;
+            }
+        }).filter(Objects::nonNull).toList();
+
+        return ResponseEntity.ok(simpleCourses);
     }
 
 }
