@@ -26,11 +26,11 @@ body {
     display: block;
 }
 
-.search-bar-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/*.search-bar-top {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
 
 .search-input-top {
     padding: 5px 10px;
