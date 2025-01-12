@@ -8,6 +8,7 @@ import platform.backend.repositories.RecentlyVisitedCourseRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecentlyVisitedCourseService {
@@ -17,12 +18,24 @@ public class RecentlyVisitedCourseService {
 
     @Transactional
     public void saveRecentlyVisitedCourse(String username, String courseCode) {
-        RecentlyVisitedCourse course = new RecentlyVisitedCourse();
-        course.setUsername(username != null ? username : "Guest");
-        course.setCourseCode(courseCode != null ? courseCode : "Unknown");
-        course.setVisitedAt(new Date());
-        recentlyVisitedCourseRepository.save(course);
-        System.out.println("Course saved: " + course);
+        // Check if the course already exists for the user
+        Optional<RecentlyVisitedCourse> existingCourse = recentlyVisitedCourseRepository.findByUsernameAndCourseCode(username, courseCode);
+
+        if (existingCourse.isPresent()) {
+            // Update visitedAt if the course already exists
+            RecentlyVisitedCourse course = existingCourse.get();
+            course.setVisitedAt(new Date());
+            recentlyVisitedCourseRepository.save(course);
+            System.out.println("Course updated: " + course);
+        } else {
+            // Save a new course if it does not exist
+            RecentlyVisitedCourse newCourse = new RecentlyVisitedCourse();
+            newCourse.setUsername(username != null ? username : "Guest");
+            newCourse.setCourseCode(courseCode != null ? courseCode : "Unknown");
+            newCourse.setVisitedAt(new Date());
+            recentlyVisitedCourseRepository.save(newCourse);
+            System.out.println("New course saved: " + newCourse);
+        }
     }
 
     // Fetch recently visited courses
