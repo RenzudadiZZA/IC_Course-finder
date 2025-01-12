@@ -1,5 +1,6 @@
+// This is the js for home page -- the page with IC logo and welcome message
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize particles.js
+    // Initialize particles.js background
     particlesJS('particles-js', {
         particles: {
             number: {
@@ -61,11 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
         retina_detect: true
     });
 
-    // Button click event
+    // Button click event to redirect to Main.html if logged in
     const getStartedButton = document.getElementById('get-started-button');
     getStartedButton.addEventListener('click', function () {
-        // Redirect to Main.html
-        window.location.href = "../html/Main.html";
+        const username = localStorage.getItem('username');
+        const role = localStorage.getItem('role'); // Get the role from localStorage
+
+        if (username) {
+            // Redirect to Main.html with username and role as query parameters
+            window.location.href = `../html/Main.html?username=${username}&role=${role || ''}`;
+        } else {
+            alert('Please log in before accessing the main page.');
+        }
     });
 
     // Sidebar and overlay functionality
@@ -139,10 +147,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (response.ok) {
                     // Store username to localStorage
-                    localStorage.setItem('username', usernameInput);
+                    const responseData = await response.json();
+                    localStorage.setItem('username', responseData.username);
+                    localStorage.setItem('role', responseData.role);
 
                     // Redirect to Home page
-                    window.location.href = '/index.html';
+                    window.location.href = '../Index.html';
                 } else {
                     const errorMessage = await response.text();
                     alert(`Error: ${errorMessage}`); // Warning of error message
