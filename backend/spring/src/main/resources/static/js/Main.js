@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', () => {
     const advancedButton = document.getElementById('advanced-button');
     const keywordLabel = document.querySelector('label[for="course-keywords"]');
-    const keywordInput = document.getElementById('course-keywords');
 
+    document.getElementById('course-keywords');
     advancedButton.addEventListener('click', () => {
         if (advancedButton.classList.contains('active')) {
             // Revert to normal search mode
@@ -124,7 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const rows = data.map(course => `
                 <tr>
-                    <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
+                    <td>
+                        <a href="/html/InfoPage.html?courseCode=${course.courseCode}" 
+                           class="course-link" 
+                           data-course-code="${course.courseCode}">
+                            ${course.title}
+                        </a>
+                    </td>
                     <td>${course.level || 'N/A'}</td>
                     <td>${course.term || 'N/A'}</td>
                     <td>${course.courseCode}</td>
@@ -132,6 +138,39 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
 
             courseListElement.innerHTML = rows;
+
+            // Add click event listener to course links
+            const courseLinks = document.querySelectorAll('.course-link');
+            courseLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Temporarily prevent default navigation
+
+                    const courseCode = link.dataset.courseCode;
+                    const username = localStorage.getItem('username') || 'guest'; // Replace with actual logic
+
+                    console.log(`Saving recently viewed course: ${courseCode}, username: ${username}`); // Debugging log
+
+                    // Send request to save recently viewed course
+                    fetch('/api/recently-visited', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, courseCode })
+                    }).then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to save course. Status: ${response.status}`);
+                        }
+                        console.log('Successfully saved course');
+
+                        // After saving, navigate to the course details page
+                        window.location.href = link.href;
+                    }).catch(error => {
+                        console.error('Error saving recently visited course:', error);
+
+                        // Even if saving fails, navigate to the course details page
+                        window.location.href = link.href;
+                    });
+                });
+            });
         })
         .catch(error => {
             console.error('Error loading courses:', error);
@@ -148,3 +187,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+

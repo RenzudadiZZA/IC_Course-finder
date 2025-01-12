@@ -31,5 +31,13 @@ public class CourseService {
     public void deleteCourse(String courseCode) {
         courseRepository.deleteById(courseCode);
     }
-    
+
+    // Get title by Course code
+    public String getTitleByCourseCode(String courseCode) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        if (course != null) {
+            return course.getTitle();
+        }
+        return "Unknown Title";
+    }
 }
