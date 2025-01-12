@@ -168,3 +168,41 @@ body {
     z-index: -1;
     background-color: #f8f9fa;
 }
+
+/* Recent courses styles*/
+.recently-viewed-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recently-viewed-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recently-viewed-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recently-viewed-list li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.recently-viewed-list li:last-child {
+    margin-bottom: 0;
+}
+
+.recently-viewed-list li a:hover {
+    text-decoration: underline;
+}
+

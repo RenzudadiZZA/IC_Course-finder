@@ -195,6 +195,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const recentCoursesContainer = document.getElementById('recent-courses-container');
+    const recentCoursesList = document.getElementById('recent-courses-list');
+    const username = localStorage.getItem('username') || 'guest'; // Replace guest with an actual username if needed
+
+    // Fetch recently visited courses
+    fetch(`/api/recently-visited/${username}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                // Populate the list with course data
+                const listItems = data.map(course => `
+                    <li>
+                        <a href="/html/InfoPage.html?courseCode=${course.courseCode}">
+                            ${course.title} (${course.courseCode})
+                        </a>
+                    </li>
+                `).join('');
+                recentCoursesList.innerHTML = listItems;
+
+                // Show the "Recently Viewed Courses" section
+                recentCoursesContainer.style.display = 'block';
+            } else {
+                // Hide the "Recently Viewed Courses" section if no data
+                recentCoursesContainer.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recently visited courses:', error);
+            // Hide the section on error
+            recentCoursesContainer.style.display = 'none';
+        });
+});
 
 
 
