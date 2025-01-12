@@ -40,4 +40,12 @@ public class CourseService {
         }
         return "Unknown Title";
     }
+
+    // Search courses by keywords
+    public List<Course> searchCourses(String keywords) {
+        System.out.println("Searching courses with keywords: " + keywords);
+        List<Course> courses = courseRepository.searchCourses(keywords);
+        System.out.println("Found courses: " + courses.size());
+        return courses;
+    }
 }

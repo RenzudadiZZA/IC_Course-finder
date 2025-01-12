@@ -47,4 +47,12 @@ public class CourseController {
         return courseService.getAllCourses(); // This returns all courses relevant information
     }
 
+    // search courses by keywords and course code
+    @GetMapping("/search")
+    public ResponseEntity<List<Course>> searchCourses(@RequestParam("keywords") String keywords) {
+        System.out.println("Received search request with keywords: " + keywords);
+        List<Course> courses = courseService.searchCourses(keywords);
+        return ResponseEntity.ok(courses);
+    }
+
 }
