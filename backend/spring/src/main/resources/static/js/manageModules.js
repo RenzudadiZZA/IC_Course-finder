@@ -1,3 +1,24 @@
+// Redirect to Home Page when clicking on the IC logo
+document.addEventListener('DOMContentLoaded', () => {
+    const icLogo = document.getElementById('logo');
+    if (icLogo) {
+        icLogo.addEventListener('click', () => {
+            window.location.href = '../Index.html ';
+        });
+    }
+});
+
+// Redirect to Home Page when clicking on back to list button
+document.addEventListener('DOMContentLoaded', () => {
+    const backToListButton = document.getElementById('back-to-list');
+    if (backToListButton) {
+        backToListButton.addEventListener('click', () => {
+            window.location.href = '../html/Main.html';
+        });
+    }
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
     // Handle add course form submission
     const addCourseForm = document.getElementById("addCourseForm");
