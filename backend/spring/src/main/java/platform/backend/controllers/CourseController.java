@@ -55,4 +55,10 @@ public class CourseController {
         return ResponseEntity.ok(courses);
     }
 
+    @GetMapping("/search/content")
+    public ResponseEntity<List<Course>> searchCoursesbyContent(@RequestParam("keyword") String keyword) {
+        List<Course> courses = courseService.searchCoursesbyContent(keyword);
+        return ResponseEntity.ok(courses);
+    }
+
 }

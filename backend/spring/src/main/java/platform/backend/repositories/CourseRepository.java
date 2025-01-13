@@ -15,5 +15,11 @@ public interface CourseRepository extends JpaRepository<Course, String> {
             "OR LOWER(c.courseCode) = LOWER(:keywords)")
     List<Course> searchCourses(@Param("keywords") String keywords);
 
+    // Search by course learning outcomes, module content, and description
+    @Query("SELECT c FROM Course c WHERE " +
+            "LOWER(c.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(c.moduleContent) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(c.learningOutcomes) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Course> searchCoursesbyContent(@Param("keyword") String keyword);
 
 }
