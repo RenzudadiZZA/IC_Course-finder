@@ -60,4 +60,9 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public String getRole(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getRole();
+    }
 }

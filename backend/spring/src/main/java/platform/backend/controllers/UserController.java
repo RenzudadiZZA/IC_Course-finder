@@ -63,4 +63,11 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
+
+    @GetMapping("/getRole")
+    public ResponseEntity<String> getRole(@RequestParam("keyword") String keyword) {
+        String role = userService.getRole(keyword);
+        return ResponseEntity.ok(role);
+    }
+
 }
