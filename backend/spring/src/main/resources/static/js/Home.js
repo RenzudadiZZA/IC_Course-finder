@@ -142,27 +142,28 @@ document.addEventListener('DOMContentLoaded', function () {
             const isTeacher = document.getElementById('register-as-teacher').checked;
             try {
                 if (isTeacher) {
-                    // Register as Teacher
-                    const response = await fetch('/api/users/validate-staff', {
+                    // Register as Admin (Teacher)
+                    const response = await fetch('/api/users/registerAdmin', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            staffID: usernameInput,
+                            staffId: usernameInput, // staffId 作为管理员的 username
                             password: passwordInput,
                         }),
                     });
 
                     if (response.ok) {
-                        alert('Teacher registration successful!');
-                        document.querySelector('.login-button').click();
+                        const data = await response.json();
+                        alert(`Admin registration successful! Welcome, ${data.admin.username}`);
+                        document.querySelector('.login-button').click(); // Redirect to Login
                     } else {
-                        const errorMessage = await response.text();
-                        alert(`Error: ${errorMessage}`);
+                        const errorMessage = await response.json();
+                        alert(`Error: ${errorMessage.message}`);
                     }
                 } else {
-                    // Normal user registration
+                    // Register as Normal User
                     const response = await fetch('/api/users/register', {
                         method: 'POST',
                         headers: {
@@ -179,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.querySelector('.login-button').click(); // Redirect to Login
                     } else {
                         const errorMessage = await response.text();
-                        alert(`Error: ${errorMessage}`); // Alert error message
+                        alert(`Error: ${errorMessage}`);
                     }
                 }
             } catch (error) {
