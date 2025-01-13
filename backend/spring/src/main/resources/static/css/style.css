@@ -1,0 +1,769 @@
+
+/*Moved all stylesheets into one document to ensure similar formatting across the website -Henry*/
+
+/*Styles from home.css*/
+.homepage-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logo-container {
+    position: absolute;
+    top: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.imperial-logo {
+    max-width: 300px;
+    height: auto;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.main-title h1 {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.get-started-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    background-color: #0055a6;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-button:hover {
+    background-color: #004494;
+}
+
+.intro-text {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+    max-width: 600px;
+    line-height: 1.5;
+    text-align: center;
+    margin-left: auto; /* Centers the box horizontally */
+    margin-right: auto; /* Centers the box horizontally */
+}
+
+.auth-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.login-button, .register-button, .logout-button, .menu button,.course-fav button{
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid #0055a6;
+    background-color: white;
+    color: #0055a6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover, .register-button:hover, .logout-button:hover , .menu button:hover,.course-fav button:hover{
+    background-color: #0055a6;
+    color: white;
+}
+
+.logout-button {
+    display: none;
+}
+
+/* Sidebar styles renamed .home-sidebar to avoid conflict with .sidebar class from main page - henry*/
+.home-sidebar {
+    position: fixed;
+    top: 0;
+    right: calc(-100%);
+    width: 300px;
+    height: 100%;
+    background-color: #f8f9fa;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.home-sidebar.open {
+    right: 0;
+}
+
+.home-sidebar h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.home-sidebar label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.home-sidebar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.home-sidebar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0055a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.home-sidebar button:hover {
+    background-color: #004494;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+.overlay.show {
+    display: block;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #f8f9fa;
+}
+
+/* Recent courses styles*/
+.recently-viewed-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recently-viewed-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recently-viewed-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recently-viewed-list li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.recently-viewed-list li:last-child {
+    margin-bottom: 0;
+}
+
+.recently-viewed-list li a:hover {
+    text-decoration: underline;
+}
+
+#register-teacher-label {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    width: fit-content;
+}
+
+.teacher-text {
+    max-width: 400px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+/*styles from main.css*/
+/* General Styles */
+.main-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-buttons {
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#logo img {
+    display: block;
+}
+
+/*.search-bar-top {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
+
+.search-input-top {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.search-button-top {
+    background-color: #0055a6;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+/* replaced with styles from home.css - henry
+.menu button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.course-fav button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+*/
+/* Finder Section */
+.finder-section {
+    margin: 40px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.finder-section h1 {
+    font-size: 24px;
+    color: #002147;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.course-input, .course-level {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.search-button, .clear-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-button {
+    background-color: #0055a6;
+    color: white;
+}
+
+.search-button:hover {
+    background-color: #003d73;
+}
+
+.clear-button {
+    background-color: #ccc;
+    color: white;
+}
+.advanced-button {
+    background-color: #ccc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.clear-button:hover {
+    background-color: #aaa;
+}
+
+/* Results Section */
+.results-section {
+    margin-top: 40px;
+}
+/*added table-container to make website viewport constant width on mobile*/
+.table-container {
+  width: 100%; /* Ensure the container fits within the viewport */
+  overflow-x: auto; /* Enable horizontal scrolling for wide tables */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile devices */
+}
+
+.course-table {
+    width: 100%;
+
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.course-table th, .course-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.course-table th {
+    background-color: #002147;
+    color: white;
+}
+/* Sidebar Styles - removing duplication and ensuring that these dont conflict with other parts of the website - henry */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.sidebar-content h2 {
+    font-size: 24px;
+    color: #002147;
+}
+
+.sidebar-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-content label {
+    margin: 10px 0 5px;
+}
+
+.sidebar-content input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sidebar-content button {
+    padding: 10px;
+    background-color: #0055a6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sidebar-content button:hover {
+    background-color: #003d73;
+}
+.sidebar-button{
+  margin-top: 5px;
+}
+.user-info {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #002147;
+}
+.advanced-button.active {
+    background-color: red;
+    color: white;
+}
+
+
+/* Reference 3 taken from chatgpt.com */
+/* Course List Styles */
+/* Sidebar styles */
+/*removed for duplication
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+*/
+.sidebar-content h2 {
+    font-size: 24px;
+    color: #002147;
+}
+
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-content li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #002147;
+}
+
+.sidebar-content a {
+    text-decoration: none;
+    color: #002147;
+}
+
+.sidebar-content a:hover {
+    text-decoration: underline;
+}
+/* End of Reference 3 */
+
+.star-button {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.star-button:hover {
+    color: #999;
+}
+
+.star-button.active {
+    color: yellow;
+}
+
+/* refence6 Taken from Chatgpt */
+.filter-container {
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Label Styles */
+.filter-container label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+    text-align: center;
+}
+
+/* Select Dropdown Styles */
+.filter-container select {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.filter-container select:focus {
+    border-color: #0055a6;
+    box-shadow: 0 0 5px rgba(0, 85, 166, 0.5);
+}
+
+/* Button Styles */
+.filter-container button {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0055a6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.filter-container button:hover {
+    background-color: #003d73;
+    transform: scale(1.05);
+}
+
+
+
+/*course-details.css content*/
+.course-details-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+
+
+.course-details-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.course-details-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.course-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.course-content-button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #0055a6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.course-content-button:hover {
+    background-color: #004494;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 14px;
+}
+
+/*styles from managemodules.css  -Henry*/
+/* General Styles */
+.manage-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.manage-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h1 {
+    font-size: 28px;
+    color: #002147;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Section Headers */
+h2 {
+    font-size: 20px;
+    color: #0055a6;
+    border-bottom: 2px solid #0055a6;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 40px;
+}
+
+form label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #f8f9fa;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #0055a6;
+    box-shadow: 0 0 5px rgba(0, 85, 166, 0.5);
+    outline: none;
+}
+
+/* Button Styles */
+form button {
+    display: block;
+    width: 100%;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #0055a6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+form button:hover {
+    background-color: #003d73;
+    transform: scale(1.05);
+}
+
+/* Add/Delete Course Section Styles */
+.add-course, .delete-course {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.add-course h2, .delete-course h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #0055a6;
+    margin-bottom: 20px;
+}
+
+.add-course form, .delete-course form {
+    padding: 0 10px;
+}
+
+/* Highlighted Borders */
+.add-course {
+    border-left: 5px solid #0055a6;
+}
+
+.delete-course {
+    border-left: 5px solid #d9534f;
+}
+
+.delete-course h2 {
+    color: #d9534f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    form button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}

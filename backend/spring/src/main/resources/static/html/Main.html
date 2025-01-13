@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial Module Finder</title>
-    <link rel="stylesheet" href="../css/Main.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-<div class="container">
+<body class="main-body">
+<div class="container-main">
     <!-- Header with Logo -->
     <header class="header">
         <div id="logo">
@@ -15,12 +15,13 @@
         </div>
 
         <!--  I removed Search bar on top here -Ziang -->
-
-        <div class="course-fav">
-            <button id="course-list-button" class="course-list-button">My module List</button>
-        </div>
-        <div class="menu">
-            <button>Menu</button>
+        <div class="header-buttons">
+            <div class="course-fav">
+                <button id="course-list-button" class="course-list-button">My Module List</button>
+            </div>
+            <div class="menu">
+                <button>Menu</button>
+            </div>
         </div>
 
     </header>
@@ -90,11 +91,12 @@
 
         <!-- Results Section -->
         <section class="results-section">
+          <div class="table-container">
             <table class="course-table">
                 <thead>
                 <tr>
                     <th>Title</th>
-                    
+
                     <th>Module Duration</th>
                     <th>Module Code</th>
                 </tr>
@@ -104,6 +106,7 @@
                 </tbody>
 
             </table>
+          </div>
         </section>
         <!-- Add Sidebar Structure -->
         <div id="sidebar" class="sidebar">
@@ -128,6 +131,9 @@
         </div>
 
     </main>
+    <footer>
+        <p>&copy; 2025 Imperial College London BME group platform. All rights reserved.</p>
+    </footer>
 </div>
 
 <script src="../js/Main.js"></script>

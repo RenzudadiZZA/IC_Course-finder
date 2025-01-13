@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial Course Finder</title>
-    <link rel="stylesheet" href="css/Home.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="homepage-body">
 <!-- particles.js container -->
 <div id="particles-js"></div>
 
@@ -30,13 +30,13 @@
     <section class="action-section">
         <button id="get-started-button" class="get-started-button">Get Started</button>
     </section>
+    <!-- Recently viewed (moved into flex container for mobile use)-->
+    <div id="recent-courses-container" class="recently-viewed-section" style="display: none;">
+        <h3>Recently Viewed Courses</h3>
+        <ul id="recent-courses-list" class="recently-viewed-list"></ul>
+    </div>
 
-</div>
 
-<!-- Recently viewed -->
-<div id="recent-courses-container" class="recently-viewed-section" style="display: none;">
-    <h3>Recently Viewed Courses</h3>
-    <ul id="recent-courses-list" class="recently-viewed-list"></ul>
 </div>
 
 <div class="auth-buttons">
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Sidebar for Login and Register -->
-<div class="sidebar" id="auth-sidebar">
+<div class="home-sidebar" id="auth-sidebar">
     <h2 id="sidebar-title">Login</h2>
     <label for="username" id="username-label">Username:</label>
     <input type="text" id="username" placeholder="Enter your username">

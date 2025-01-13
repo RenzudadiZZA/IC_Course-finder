@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // Get the courseCode from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -135,6 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html'; // Redirect to course list
     });
 });
+
+
+// Redirect to Home Page when clicking on the IC logo
+document.addEventListener('DOMContentLoaded', () => {
+    const icLogo = document.getElementById('logo');
+    if (icLogo) {
+        icLogo.addEventListener('click', () => {
+            window.location.href = '../Index.html ';
+        });
+    }
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get the course code from the URL

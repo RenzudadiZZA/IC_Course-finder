@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Modules</title>
-    <link rel="stylesheet" href="../css/manageModules.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-<div class="container">
-    <h1>Manage Modules</h1>
+<body class="manage-body">
+<div class="container-main">
+  <header class="header">
+      <div id="logo">
+          <img src="../assets/New-Brand-logo.png" alt="Imperial Logo" width="300px">
+      </div>
+
+      <!--  I removed Search bar on top here -Ziang -->
+      <div class="header-buttons">
+
+          <div class="menu">
+              <button id="back-to-list">Back to List</button>
+          </div>
+      </div>
+
+  </header>
+<div class="manage-container">
+
 
     <section class="add-course">
         <h2>Add Course</h2>
@@ -51,6 +66,10 @@
             <button type="submit">Delete Course</button>
         </form>
     </section>
+</div>
+<footer>
+    <p>&copy; 2025 Imperial College London BME group platform. All rights reserved.</p>
+</footer>
 </div>
 
 <script src="../js/manageModules.js"></script>
