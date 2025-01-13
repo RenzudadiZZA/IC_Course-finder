@@ -219,7 +219,7 @@ body {
 }
 
 
-
+/* Reference 3 taken from chatgpt.com */
 /* Course List Styles */
 /* Sidebar styles */
 .sidebar {
@@ -266,6 +266,7 @@ body {
 .sidebar-content a:hover {
     text-decoration: underline;
 }
+/* End of Reference 3 */
 
 .star-button {
     background: none; /* Remove background */
