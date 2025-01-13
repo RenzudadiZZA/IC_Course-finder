@@ -406,3 +406,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", async () => {
+    // Get username from localStorage
+    const username = localStorage.getItem("username");
+    if (!username) {
+        console.error("User not logged in.");
+        return;
+    }
+
+    try {
+        // get user role
+        const response = await fetch(`/api/users/getRole?keyword=${encodeURIComponent(username)}`);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch user role: ${response.statusText}`);
+        }
+
+        const role = await response.text();
+        console.log("User Role:", role);
+
+        const sidebar = document.querySelector(".sidebar-content");
+
+        // Check if user is an admin
+        if (role === "admin") {
+            console.log("Admin user detected, adding 'Manage Modules' button.");
+
+            const manageModulesButton = document.createElement("button");
+            manageModulesButton.textContent = "Manage Modules";
+            manageModulesButton.classList.add("sidebar-button");
+            manageModulesButton.addEventListener("click", () => {
+                window.location.href = "../html/manage_module.html";
+            });
+
+            // add button to sidebar
+            sidebar.appendChild(manageModulesButton);
+        } else {
+            console.log("Non-admin user detected. Sidebar will remain unchanged.");
+        }
+    } catch (error) {
+        console.error("Error fetching user role:", error);
+    }
+});

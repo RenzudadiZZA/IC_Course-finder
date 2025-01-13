@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Modules</title>
+    <link rel="stylesheet" href="../css/manageModules.css">
+</head>
+<body>
+<div class="container">
+    <h1>Manage Modules</h1>
+
+    <section class="add-course">
+        <h2>Add Course</h2>
+        <form id="addCourseForm">
+            <label for="courseCode">Course Code:</label>
+            <input type="text" id="courseCode" name="courseCode" required>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="term">Term:</label>
+            <input type="text" id="term" name="term" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="learningOutcomes">Learning Outcomes:</label>
+            <textarea id="learningOutcomes" name="learningOutcomes"></textarea>
+
+            <label for="moduleContent">Module Content:</label>
+            <textarea id="moduleContent" name="moduleContent"></textarea>
+
+            <label for="prerequisites">Prerequisites:</label>
+            <input type="text" id="prerequisites" name="prerequisites">
+
+            <label for="lecturer">Lecturer:</label>
+            <input type="text" id="lecturer" name="lecturer">
+
+            <button type="submit">Add Course</button>
+        </form>
+    </section>
+
+    <!-- delete -->
+    <section class="delete-course">
+        <h2>Delete Course</h2>
+        <form id="deleteCourseForm">
+            <label for="deleteCourseCode">Course Code:</label>
+            <input type="text" id="deleteCourseCode" name="deleteCourseCode" required>
+
+            <button type="submit">Delete Course</button>
+        </form>
+    </section>
+</div>
+
+<script src="../js/manageModules.js"></script>
+</body>
+</html>
