@@ -353,3 +353,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sidebar.style.display = 'block';
 });
+
+// filter courses by department
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("filterButton").addEventListener("click", async () => {
+        const department = document.getElementById("departmentFilter").value;
+
+        try {
+            const response = await fetch("/api/courses");
+            const courses = await response.json();
+            console.log("Fetched courses:", courses);
+            const courseList = document.getElementById("course-list");
+            if (!courseList) {
+                console.error("course-list element not found!");
+                return;
+            }
+
+            // Clear existing course list
+            courseList.innerHTML = "";
+
+            const filteredCourses = courses.filter(course => {
+                console.log("Filtering course:", course.courseCode, "with department:", department);
+                if (!course || !course.courseCode) {
+                    console.warn("Invalid course object:", course);
+                    return false;
+                }
+                if (department === "All") return true;
+                if (department === "Computing") return course.courseCode.startsWith("COMP");
+                if (department === "Bioengineering") return course.courseCode.startsWith("BIOE");
+                if (department === "Mathematics") return course.courseCode.startsWith("MATH");
+                if (department === "Aeronautics") return course.courseCode.startsWith("AERO");
+                return false;
+            });
+
+            if (filteredCourses.length === 0) {
+                courseList.innerHTML = "<tr><td colspan='4'>No courses found.</td></tr>";
+            } else {
+                filteredCourses.forEach(course => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title || "No title available"}</a></td>
+                        <td>${course.level || "N/A"}</td>
+                        <td>${course.term || "N/A"}</td>
+                        <td>${course.courseCode}</td>
+                    `;
+                    courseList.appendChild(row);
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching courses:", error);
+            const courseList = document.getElementById("course-list");
+            courseList.innerHTML = "<tr><td colspan='4'>Error fetching results. Please try again later.</td></tr>";
+        }
+    });
+});
