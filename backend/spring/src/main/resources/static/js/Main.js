@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     searchButton.addEventListener('click', () => {
-        console.log('Search button clicked'); // 调试按钮点击
         const keyword = keywordInput.value.trim();
 
 
@@ -118,23 +117,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Toggle advanced search functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const advancedButton = document.getElementById('advanced-button');
-    const keywordLabel = document.querySelector('label[for="course-keywords"]');
 
-    advancedButton.addEventListener('click', () => {
-        if (advancedButton.classList.contains('active')) {
-            // Revert to normal search mode
-            keywordLabel.textContent = 'Search by module name:';
-            advancedButton.textContent = 'Search module content';
-            advancedButton.classList.remove('active');
-        } else {
-            // Switch to advanced search mode
-            keywordLabel.textContent = 'Search module by course content keywords:';
-            advancedButton.textContent = 'Search module name';
-        }
-        advancedButton.classList.toggle('active');
+    const contentSearchButton = document.querySelector('.advanced-button');
+    const keywordInput = document.querySelector('#course-keywords');
+    const courseListElement = document.getElementById('course-list');
+    contentSearchButton.addEventListener('click', () => {
+        console.log('Search module content button clicked'); // Temporary debugging log
+        const keyword = keywordInput.value.trim();
+
+        courseListElement.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+        /* refrence4 taken from chatgpt to debug*/
+        const apiEndpoint = keyword
+            ? `/api/courses/search/content?keyword=${encodeURIComponent(keyword)}`
+            : `/api/courses`;
+
+        fetch(apiEndpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch courses');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Search module content results:', data); // Temporary debugging log
+
+                /* end of refrence4 */
+                if (data.length === 0) {
+                    courseListElement.innerHTML = '<tr><td colspan="4">No courses found.</td></tr>';
+                    return;
+                }
+
+                const rows = data.map(course => `
+                    <tr>
+                        <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
+                        <td>${course.level || 'N/A'}</td>
+                        <td>${course.term || 'N/A'}</td>
+                        <td>${course.courseCode}</td>
+                    </tr>
+                `).join('');
+                courseListElement.innerHTML = rows;
+            })
+            .catch(error => {
+                console.error('Error fetching module content search results:', error);
+                courseListElement.innerHTML = '<tr><td colspan="4">Error fetching results. Please try again later.</td></tr>';
+            });
     });
 });
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const courseListButton = document.getElementById('course-list-button');
     const sidebar2 = document.getElementById('sidebar2'); // Course List Sidebar
