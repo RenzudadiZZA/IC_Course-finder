@@ -441,7 +441,9 @@
 .sidebar-content button:hover {
     background-color: #003d73;
 }
-
+.sidebar-button{
+  margin-top: 5px;
+}
 .user-info {
     margin-top: 20px;
     font-size: 18px;
