@@ -48,4 +48,9 @@ public class CourseService {
         System.out.println("Found courses: " + courses.size());
         return courses;
     }
+
+
+    public List<Course> searchCoursesbyContent(String keyword) {
+        return courseRepository.searchCoursesbyContent(keyword);
+    }
 }

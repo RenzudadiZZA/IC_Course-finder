@@ -17,7 +17,7 @@
         <!--  I removed Search bar on top here -Ziang -->
 
         <div class="course-fav">
-            <button id="course-list-button" class="course-list-button">My Course List</button>
+            <button id="course-list-button" class="course-list-button">My module List</button>
         </div>
         <div class="menu">
             <button>Menu</button>
@@ -26,7 +26,6 @@
     </header>
 
     <main>
-
         <!-- Course Finder Section -->
         <section class="finder-section">
             <h1>Find a Module</h1>
@@ -34,41 +33,53 @@
                 <label for="course-keywords">Search by module name:</label>
                 <input id="course-keywords" type="text" placeholder="e.g., Software" class="course-input">
             </div>
-            <div class="filter-container">
-                <label for="course-area">Filter by department:</label>
-                <select id="course-area" class="course-level">
-                    <option value="all">All</option>
-                    <option value="engineering">Engineering</option>
-                    <option value="science">Science</option>
-                    <option value="business">Business</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-            <!-- Advanced Filter Button -->
-            <button id="toggle-advanced" class="advanced-button">Show Advanced Filters</button>
 
-            <!-- Advanced Filter Options -->
-            <div id="advanced-filters" class="advanced-filters" style="display: none;">
-                <div class="filter-container">
-                    <label for="course-level">Sort by module level:</label>
-                    <select id="course-level" class="course-level">
-                        <option value="all">All</option>
-                        <option value="First year">First year</option>
-                        <option value="Second year">Second year</option>
-                        <option value="Third year">Third year</option>
-                        <option value="Master">Master</option>
-                    </select>
-                </div>
-                <div class="filter-container">
-                    <label for="term">Sort by term:</label>
-                    <select id="term" class="term-level">
-                        <option value="all">All</option>
-                        <option value="1 term">Spring</option>
-                        <option value="2 terms">Autumn</option>
-                        <option value="Full year">Full year</option>
-                    </select>
-                </div>
+            <!-- ref5 taken from chatgpt since I don't want to manually input all the departments -->
+            <div class="filter-container">
+                <h1>Filter by Department</h1>
+                <select id="departmentFilter">
+                    <option value="All">All Departments</option>
+                    <optgroup label="Faculty of Engineering">
+                        <option value="Aeronautics">Aeronautics</option>
+                        <option value="Bioengineering">Bioengineering</option>
+                        <option value="Chemical Engineering">Chemical Engineering</option>
+                        <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
+                        <option value="Computing">Computing</option>
+                        <option value="Dyson School of Design Engineering">Dyson School of Design Engineering</option>
+                        <option value="Earth Science and Engineering">Earth Science and Engineering</option>
+                        <option value="Electrical and Electronic Engineering">Electrical and Electronic Engineering</option>
+                        <option value="Materials">Materials</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    </optgroup>
+                    <optgroup label="Faculty of Medicine">
+                        <option value="Brain Sciences">Brain Sciences</option>
+                        <option value="Immunology and Inflammation">Immunology and Inflammation</option>
+                        <option value="Infectious Disease">Infectious Disease</option>
+                        <option value="Institute of Clinical Sciences">Institute of Clinical Sciences</option>
+                        <option value="Metabolism, Digestion and Reproduction">Metabolism, Digestion and Reproduction</option>
+                        <option value="National Heart and Lung Institute">National Heart and Lung Institute</option>
+                        <option value="School of Public Health">School of Public Health</option>
+                        <option value="Surgery and Cancer">Surgery and Cancer</option>
+                    </optgroup>
+                    <optgroup label="Faculty of Natural Sciences">
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Life Sciences">Life Sciences</option>
+                        <option value="Centre for Environmental Policy">Centre for Environmental Policy</option>
+                    </optgroup>
+                    <optgroup label="Imperial College Business School">
+                        <option value="Finance">Finance</option>
+                        <option value="Management and Entrepreneurship">Management and Entrepreneurship</option>
+                        <option value="Economics and Public Policy">Economics and Public Policy</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Analytics and Operations">Analytics and Operations</option>
+                    </optgroup>
+                </select>
+                <button id="filterButton">Filter</button>
             </div>
+            <!-- ref5 end -->
+
 
             <div class="button-container">
                 <button class="search-button">Search</button>
@@ -111,16 +122,7 @@
             <div class="sidebar-content">
                 <h2>My Module List</h2>
                 <ul id="course-list-items">
-                    <li>
-                        <a href="#">COMP70010 Deeplearning</a>
-                        <!-- Star button with unique class -->
-                        <button class="star-button">★</button>
-                    </li>
-                    <li>
-                        <a href="#">COMP60010 Machine Learning</a>
-                        <button class="star-button">★</button>
-                    </li>
-                    <!-- Add more modules as needed -->
+                    <!-- Dynamically updated content -->
                 </ul>
             </div>
         </div>

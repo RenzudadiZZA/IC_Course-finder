@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     searchButton.addEventListener('click', () => {
-        console.log('Search button clicked'); // 调试按钮点击
         const keyword = keywordInput.value.trim();
 
 
@@ -118,23 +117,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Toggle advanced search functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const advancedButton = document.getElementById('advanced-button');
-    const keywordLabel = document.querySelector('label[for="course-keywords"]');
 
-    advancedButton.addEventListener('click', () => {
-        if (advancedButton.classList.contains('active')) {
-            // Revert to normal search mode
-            keywordLabel.textContent = 'Search by module name:';
-            advancedButton.textContent = 'Search module content';
-            advancedButton.classList.remove('active');
-        } else {
-            // Switch to advanced search mode
-            keywordLabel.textContent = 'Search module by course content keywords:';
-            advancedButton.textContent = 'Search module name';
-        }
-        advancedButton.classList.toggle('active');
+    const contentSearchButton = document.querySelector('.advanced-button');
+    const keywordInput = document.querySelector('#course-keywords');
+    const courseListElement = document.getElementById('course-list');
+    contentSearchButton.addEventListener('click', () => {
+        console.log('Search module content button clicked'); // Temporary debugging log
+        const keyword = keywordInput.value.trim();
+
+        courseListElement.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+        /* refrence4 taken from chatgpt to debug*/
+        const apiEndpoint = keyword
+            ? `/api/courses/search/content?keyword=${encodeURIComponent(keyword)}`
+            : `/api/courses`;
+
+        fetch(apiEndpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch courses');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Search module content results:', data); // Temporary debugging log
+
+                /* end of refrence4 */
+                if (data.length === 0) {
+                    courseListElement.innerHTML = '<tr><td colspan="4">No courses found.</td></tr>';
+                    return;
+                }
+
+                const rows = data.map(course => `
+                    <tr>
+                        <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
+                        <td>${course.level || 'N/A'}</td>
+                        <td>${course.term || 'N/A'}</td>
+                        <td>${course.courseCode}</td>
+                    </tr>
+                `).join('');
+                courseListElement.innerHTML = rows;
+            })
+            .catch(error => {
+                console.error('Error fetching module content search results:', error);
+                courseListElement.innerHTML = '<tr><td colspan="4">Error fetching results. Please try again later.</td></tr>';
+            });
     });
 });
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const courseListButton = document.getElementById('course-list-button');
     const sidebar2 = document.getElementById('sidebar2'); // Course List Sidebar
@@ -249,4 +282,128 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../Index.html';
         });
     }
+});
+
+// Fetch and display all liked courses on sidebar
+document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('username');
+    const sidebar = document.getElementById('sidebar2');
+    const courseListItems = document.getElementById('course-list-items');
+
+    if (!username) {
+        console.error('User not logged in.');
+        return;
+    }
+
+    // get all liked courses
+    fetch(`/api/likedcourses/likedlist/${username}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch favorite courses');
+            }
+            return response.json();
+        })
+        .then(favorites => {
+            if (favorites.length === 0) {
+                courseListItems.innerHTML = '<li>No favorite courses added yet.</li>';
+                return;
+            }
+
+            // generate list items for each favorite course
+            const favoriteItems = favorites.map(course => `
+                <li>
+                    <a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a>
+                    <button class="star-button" data-course-code="${course.courseCode}">★</button>
+                </li>
+            `).join('');
+            courseListItems.innerHTML = favoriteItems;
+
+            // add event listeners to star buttons
+            const starButtons = document.querySelectorAll('.star-button');
+            starButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const courseCode = button.dataset.courseCode;
+
+                    // call API to remove course from favorites
+                    fetch(`/api/likedcourses/remove`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, courseCode })
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to remove course from favorites');
+                            }
+                            return response.text();
+                        })
+                        .then(message => {
+                            alert(message);
+                            button.closest('li').remove();
+                        })
+                        .catch(error => {
+                            console.error('Error removing favorite course:', error);
+                            alert('An error occurred. Please try again.');
+                        });
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching favorite courses:', error);
+        });
+
+    sidebar.style.display = 'block';
+});
+
+// filter courses by department
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("filterButton").addEventListener("click", async () => {
+        const department = document.getElementById("departmentFilter").value;
+
+        try {
+            const response = await fetch("/api/courses");
+            const courses = await response.json();
+            console.log("Fetched courses:", courses);
+            const courseList = document.getElementById("course-list");
+            if (!courseList) {
+                console.error("course-list element not found!");
+                return;
+            }
+
+            // Clear existing course list
+            courseList.innerHTML = "";
+
+            const filteredCourses = courses.filter(course => {
+                console.log("Filtering course:", course.courseCode, "with department:", department);
+                if (!course || !course.courseCode) {
+                    console.warn("Invalid course object:", course);
+                    return false;
+                }
+                if (department === "All") return true;
+                if (department === "Computing") return course.courseCode.startsWith("COMP");
+                if (department === "Bioengineering") return course.courseCode.startsWith("BIOE");
+                if (department === "Mathematics") return course.courseCode.startsWith("MATH");
+                if (department === "Aeronautics") return course.courseCode.startsWith("AERO");
+                return false;
+            });
+
+            if (filteredCourses.length === 0) {
+                courseList.innerHTML = "<tr><td colspan='4'>No courses found.</td></tr>";
+            } else {
+                filteredCourses.forEach(course => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title || "No title available"}</a></td>
+                        <td>${course.level || "N/A"}</td>
+                        <td>${course.term || "N/A"}</td>
+                        <td>${course.courseCode}</td>
+                    `;
+                    courseList.appendChild(row);
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching courses:", error);
+            const courseList = document.getElementById("course-list");
+            courseList.innerHTML = "<tr><td colspan='4'>Error fetching results. Please try again later.</td></tr>";
+        }
+    });
 });

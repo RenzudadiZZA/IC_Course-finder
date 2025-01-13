@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Sidebar and overlay functionality
     const loginButton = document.querySelector('.login-button');
     const registerButton = document.querySelector('.register-button');
     const sidebar = document.getElementById('auth-sidebar');

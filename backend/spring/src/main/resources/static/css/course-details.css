@@ -73,3 +73,47 @@ footer {
     color: #333;
     font-size: 14px;
 }
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.sidebar-content h2 {
+    font-size: 24px;
+    color: #002147;
+}
+
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-content li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #002147;
+}
+
+.sidebar-content a {
+    text-decoration: none;
+    color: #002147;
+}
+
+.sidebar-content a:hover {
+    text-decoration: underline;
+}
