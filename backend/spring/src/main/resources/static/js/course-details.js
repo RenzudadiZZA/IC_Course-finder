@@ -176,3 +176,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('username');
+    const sidebar = document.getElementById('sidebar3');
+    const courseListItems = document.getElementById('course-list-items');
+
+    if (!username) {
+        console.error('User not logged in.');
+        return;
+    }
+
+    // get all liked courses
+    fetch(`/api/likedcourses/likedlist/${username}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch favorite courses');
+            }
+            return response.json();
+        })
+        .then(favorites => {
+            if (favorites.length === 0) {
+                courseListItems.innerHTML = '<li>No favorite courses added yet.</li>';
+                return;
+            }
+
+            // generate list items for each favorite course
+            const favoriteItems = favorites.map(course => `
+                <li>
+                    <a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a>
+                    <button class="star-button" data-course-code="${course.courseCode}">★</button>
+                </li>
+            `).join('');
+            courseListItems.innerHTML = favoriteItems;
+
+            // add event listeners to star buttons
+            const starButtons = document.querySelectorAll('.star-button');
+            starButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const courseCode = button.dataset.courseCode;
+
+                    // call API to remove course from favorites
+                    fetch(`/api/likedcourses/remove`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, courseCode })
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to remove course from favorites');
+                            }
+                            return response.text();
+                        })
+                        .then(message => {
+                            alert(message);
+                            button.closest('li').remove();
+                        })
+                        .catch(error => {
+                            console.error('Error removing favorite course:', error);
+                            alert('An error occurred. Please try again.');
+                        });
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching favorite courses:', error);
+        });
+
+    sidebar.style.display = 'block';
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const courseListButton = document.getElementById('course-list-button2');
+    const sidebar2 = document.getElementById('sidebar3'); // Course List Sidebar
+
+    courseListButton.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent the click from propagating to the document
+
+        // Close the sidebar if it's open
+        if (sidebar2.style.width === '250px') {
+            sidebar2.style.width = '0';
+        }
+
+        // close the sidebar if it clicked outside
+        document.addEventListener('click', function (event) {
+            if (event.target !== courseListButton) {
+                sidebar2.style.width = '0';
+            }
+        });
+        // Toggle the course list sidebar
+        sidebar2.style.width = sidebar2.style.width === '250px' ? '0' : '250px';
+
+    });
+
+
+
+});
