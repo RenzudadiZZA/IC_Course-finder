@@ -83,19 +83,49 @@ document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('sidebar-overlay');
     const sidebarTitle = document.getElementById('sidebar-title');
     const authSubmitButton = document.getElementById('auth-submit-button');
+    const registerTeacherLabel = document.getElementById('register-teacher-label');
+    const registerAsTeacherCheckbox = document.getElementById('register-as-teacher');
+    const usernameLabel = document.getElementById('username-label');
+    const usernameInput = document.getElementById('username');
 
+    // Login click logic
     loginButton.addEventListener('click', () => {
         sidebar.classList.add('open');
         overlay.classList.add('show');
         sidebarTitle.textContent = 'Login';
         authSubmitButton.textContent = 'Login';
+
+        // Hide checkbox
+        registerTeacherLabel.style.display = 'none';
+        registerAsTeacherCheckbox.checked = false;
+        usernameLabel.textContent = 'Username:';
+        usernameInput.placeholder = 'Enter your username';
     });
 
+    // Register click logic
     registerButton.addEventListener('click', () => {
         sidebar.classList.add('open');
         overlay.classList.add('show');
         sidebarTitle.textContent = 'Register';
         authSubmitButton.textContent = 'Register';
+
+        // Display checkbox
+        console.log("Showing Register as a Teacher checkbox");
+        registerTeacherLabel.style.display = 'flex';
+        registerAsTeacherCheckbox.checked = false;
+    });
+
+    // switch content when click check box
+    registerAsTeacherCheckbox.addEventListener('change', () => {
+        if (registerAsTeacherCheckbox.checked) {
+            console.log("Register as Teacher checked");
+            usernameLabel.textContent = 'Staff ID:';
+            usernameInput.placeholder = 'Enter your Staff ID';
+        } else {
+            console.log("Register as Teacher unchecked");
+            usernameLabel.textContent = 'Username:';
+            usernameInput.placeholder = 'Enter your username';
+        }
     });
 
     overlay.addEventListener('click', () => {
@@ -110,24 +140,50 @@ document.addEventListener('DOMContentLoaded', function () {
         const sidebarTitle = document.getElementById('sidebar-title').textContent;
 
         if (sidebarTitle === 'Register') {
-            try {
-                const response = await fetch('/api/users/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: usernameInput,
-                        password: passwordInput,
-                    }),
-                });
+            const isTeacher = document.getElementById('register-as-teacher').checked;
+            const registerButton = document.getElementById('auth-submit-button');
 
-                if (response.ok) {
-                    alert('Registration successful! Redirecting to login...');
-                    document.querySelector('.login-button').click(); // Redirect to Login
+            try {
+                if (isTeacher) {
+                    // Register as Teacher
+                    const response = await fetch('/api/users/registerAdmin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            staffId: usernameInput,
+                            password: passwordInput,
+                        }),
+                    });
+
+                    if (response.ok) {
+                        alert('Admin registration successful!');
+                        document.querySelector('.login-button').click();
+                    } else {
+                        const errorMessage = await response.text();
+                        alert(`Error: ${errorMessage}`);
+                    }
                 } else {
-                    const errorMessage = await response.text();
-                    alert(`Error: ${errorMessage}`); // Alert error message
+                    // Normal user registration
+                    const response = await fetch('/api/users/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: usernameInput,
+                            password: passwordInput,
+                        }),
+                    });
+
+                    if (response.ok) {
+                        alert('Registration successful! Redirecting to login...');
+                        document.querySelector('.login-button').click();
+                    } else {
+                        const errorMessage = await response.text();
+                        alert(`Error: ${errorMessage}`);
+                    }
                 }
             } catch (error) {
                 alert(`An error occurred: ${error.message}`);

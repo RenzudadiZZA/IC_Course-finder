@@ -29,6 +29,24 @@ public class UserController {
         return ResponseEntity.badRequest().body("Username already exists");
     }
 
+    // Admin Registration
+    @PostMapping("/registerAdmin")
+    public ResponseEntity<Map<String, Object>> registerAdmin(@RequestBody Map<String, String> adminRequest) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String staffId = adminRequest.get("staffId");
+            String password = adminRequest.get("password");
+
+            User admin = userService.registerAdmin(staffId, password);
+            response.put("message", "Admin registration successful");
+            response.put("admin", admin);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         // Validate login
