@@ -366,10 +366,16 @@
 .results-section {
     margin-top: 40px;
 }
+/*added table-container to make website viewport constant width on mobile*/
+.table-container {
+  width: 100%; /* Ensure the container fits within the viewport */
+  overflow-x: auto; /* Enable horizontal scrolling for wide tables */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile devices */
+}
 
 .course-table {
     width: 100%;
-    border-radius: 8px;
+
     border-collapse: collapse;
     background-color: white;
 }
