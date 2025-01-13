@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(data => {
-            // 更新页面内容
+            // Refresh the page
             document.querySelector("#course-description").textContent = data.description || "N/A";
             document.querySelector("#course-term").textContent = data.term || "N/A";
             document.querySelector("#course-learning-outcomes").textContent = data.learningOutcomes || "N/A";
