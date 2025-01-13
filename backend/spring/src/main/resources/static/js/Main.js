@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rows = data.map(course => `
                     <tr>
                         <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
-                        <td>${course.level || 'N/A'}</td>
+
                         <td>${course.term || 'N/A'}</td>
                         <td>${course.courseCode}</td>
                     </tr>
@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rows = data.map(course => `
                     <tr>
                         <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title}</a></td>
-                        <td>${course.level || 'N/A'}</td>
                         <td>${course.term || 'N/A'}</td>
                         <td>${course.courseCode}</td>
                     </tr>
@@ -210,13 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const rows = data.map(course => `
                 <tr>
                     <td>
-                        <a href="/html/InfoPage.html?courseCode=${course.courseCode}" 
-                           class="course-link" 
+                        <a href="/html/InfoPage.html?courseCode=${course.courseCode}"
+                           class="course-link"
                            data-course-code="${course.courseCode}">
                             ${course.title}
                         </a>
                     </td>
-                    <td>${course.level || 'N/A'}</td>
+                    
                     <td>${course.term || 'N/A'}</td>
                     <td>${course.courseCode}</td>
                 </tr>
@@ -393,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
                         <td><a href="/html/InfoPage.html?courseCode=${course.courseCode}">${course.title || "No title available"}</a></td>
-                        <td>${course.level || "N/A"}</td>
+
                         <td>${course.term || "N/A"}</td>
                         <td>${course.courseCode}</td>
                     `;
