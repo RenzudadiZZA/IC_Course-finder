@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Details</title>
-    <link rel="stylesheet" href="../css/course-details.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-<header class="header">
+<body class="course-details-body">
+  <div class="container-main">
+<!--<header class="header">
     <div class="logo">
         <h1>Imperial Course Finder</h1>
     </div>
@@ -17,6 +18,22 @@
     <nav>
         <a href="../Index.html">Home</a>
     </nav>
+</header>-->
+<header class="header">
+    <div id="logo">
+        <img src="../assets/New-Brand-logo.png" alt="Imperial Logo" width="300px">
+    </div>
+
+    <!--  I removed Search bar on top here -Ziang -->
+    <div class="header-buttons">
+        <div class="course-fav">
+            <button id="course-list-button2" class="course-list-button">My module List</button>
+        </div>
+        <div class="menu">
+            <button>Menu</button>
+        </div>
+    </div>
+
 </header>
 
 <main class="course-details-container">
@@ -29,8 +46,8 @@
         <p><strong>Prerequisites:</strong> <span id="course-prerequisites">Loading...</span></p>
         <p><strong>Lecturer:</strong> <span id="course-lecturer">Loading...</span></p>
     </div>
-    <button id="add-to-favorites">Add to Favorites</button>
-    <button id="back-to-list">Back to List</button>
+    <button id="add-to-favorites" class="course-content-button">Add to Favorites</button>
+    <button id="back-to-list" class="course-content-button">Back to List</button>
 </main>
 
 <div id="sidebar3" class="sidebar">
@@ -43,7 +60,7 @@
 <footer>
     <p>&copy; 2025 Imperial College London BME group platform. All rights reserved.</p>
 </footer>
-
+</div>
 <script src="../js/course-details.js"></script>
 </body>
 </html>
