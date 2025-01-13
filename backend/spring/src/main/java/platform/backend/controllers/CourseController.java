@@ -1,6 +1,7 @@
 package platform.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import platform.backend.entities.Course;
@@ -28,8 +29,13 @@ public class CourseController {
 
     // Delete course
     @DeleteMapping("/{courseCode}")
-    public void deleteCourse(@PathVariable String courseCode) {
+    public ResponseEntity<String> deleteCourse(@PathVariable String courseCode) {
+        Course course = courseService.getCourseByCode(courseCode);
+        if (course == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
+        }
         courseService.deleteCourse(courseCode);
+        return ResponseEntity.ok("Course deleted successfully");
     }
     // Get detailed course information
     @GetMapping("/{courseCode}")

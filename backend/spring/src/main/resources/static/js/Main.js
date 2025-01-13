@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             manageModulesButton.textContent = "Manage Modules";
             manageModulesButton.classList.add("sidebar-button");
             manageModulesButton.addEventListener("click", () => {
-                window.location.href = "/manage-modules";
+                window.location.href = "../html/manage_module.html";
             });
 
             // add button to sidebar
