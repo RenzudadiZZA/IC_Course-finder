@@ -9,7 +9,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     boolean existsByUsername(String username);
     User findByUsername(String username);
     List<User> findByRole(String role);
-    // 检查特定角色的用户名是否存在（用于staffID验证）
     boolean existsByUsernameAndRole(String username, String role);
 }
 

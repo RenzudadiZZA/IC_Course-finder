@@ -19,32 +19,36 @@ public class UserService {
         return true;
     }
 
-    // 管理员注册
+    // Admin Registration
     public User registerAdmin(String staffId, String password) throws Exception {
-        // 检查 staffID 是否合法
         if (!isValidStaffId(staffId)) {
+            System.out.println("Invalid staff ID: " + staffId);
             throw new Exception("Invalid staff ID. Registration failed.");
         }
 
-        // 检查 staffID 是否已存在（作为用户名）
+        // Check existence of Admin User
         if (userRepository.existsByUsername(staffId)) {
+            System.out.println("Staff ID already exists: " + staffId);
             throw new Exception("Staff ID already exists.");
         }
 
-        // 创建管理员用户
+        System.out.println("Staff ID is unique, proceeding with registration: " + staffId);
+
+        // Create admin user
         User admin = new User();
-        admin.setUsername(staffId); // 将 staffID 存储到 username
-        admin.setPassword(password); // 密码（注意：需加密处理）
+        admin.setUsername(staffId);
+        admin.setPassword(password);
         admin.setRole("admin");
 
-        // 保存管理员到数据库
         return userRepository.save(admin);
     }
 
-    // 验证 staffID 合法性
+    // Validate StaffID
     private boolean isValidStaffId(String staffId) {
-        // 定义合法 staffID 的规则，这里仅支持 "1111" 作为合法 ID
-        return "1111".equals(staffId);
+        System.out.println("Validating staff ID: " + staffId);
+        boolean isValid = "1111".equals(staffId);
+        System.out.println("Validation result for staff ID (" + staffId + "): " + isValid);
+        return isValid;
     }
 
     // Validate login

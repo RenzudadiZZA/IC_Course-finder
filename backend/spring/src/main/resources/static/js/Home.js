@@ -140,30 +140,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (sidebarTitle === 'Register') {
             const isTeacher = document.getElementById('register-as-teacher').checked;
+            const registerButton = document.getElementById('auth-submit-button');
+
             try {
                 if (isTeacher) {
-                    // Register as Admin (Teacher)
+                    // Register as Teacher
                     const response = await fetch('/api/users/registerAdmin', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            staffId: usernameInput, // staffId 作为管理员的 username
+                            staffId: usernameInput,
                             password: passwordInput,
                         }),
                     });
 
                     if (response.ok) {
-                        const data = await response.json();
-                        alert(`Admin registration successful! Welcome, ${data.admin.username}`);
-                        document.querySelector('.login-button').click(); // Redirect to Login
+                        alert('Admin registration successful!');
+                        document.querySelector('.login-button').click();
                     } else {
-                        const errorMessage = await response.json();
-                        alert(`Error: ${errorMessage.message}`);
+                        const errorMessage = await response.text();
+                        alert(`Error: ${errorMessage}`);
                     }
                 } else {
-                    // Register as Normal User
+                    // Normal user registration
                     const response = await fetch('/api/users/register', {
                         method: 'POST',
                         headers: {
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (response.ok) {
                         alert('Registration successful! Redirecting to login...');
-                        document.querySelector('.login-button').click(); // Redirect to Login
+                        document.querySelector('.login-button').click();
                     } else {
                         const errorMessage = await response.text();
                         alert(`Error: ${errorMessage}`);
