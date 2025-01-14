@@ -79,7 +79,7 @@ First, we implemented ALL the functions discussed with Dr. Ouldridge!
 
 ![image-20250113223448417](./coverage.png)
 
-We achieved 94% class coverage including 100% class coverage on controllers and services and 79% overall method coverage through Junit tests. Our Junit tests are designed to simulate some API post/get/delete responses and check if the apis return what is expected. We use assert true, assert equal, size of reply etc. to determine this.
+We achieved 88% class coverage and 79% method coverage through Junit tests. Our Junit tests are designed to simulate some API post/get/delete responses and check if the apis return what is expected. We use assert true, assert equal, size of reply etc. to determine this.
 
 Our code is well commented to ensure good legibility and coordination with other team members and future developers, we use descriptive words as class/file names  and variable names.
 
