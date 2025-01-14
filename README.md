@@ -79,8 +79,7 @@ First, we implemented ALL the functions discussed with Dr. Ouldridge!
 
 ![image-20250113223448417](./coverage.png)
 
-We achieved 88% class coverage and 79% method coverage through Junit tests. Our Junit tests are designed to simulate some API post/get/delete responses and check if the apis return what is expected. We use assert true, assert equal, size of reply etc. to determine this.
-
+We achieved an impressive 94% class coverage, including 100% coverage for controllers and services, and 79% overall method coverage through JUnit tests. These tests are designed to simulate API responses for POST, GET, and DELETE requests, ensuring the APIs behave as expected. We utilize assertions such as assertTrue, assertEquals, verify and checks on the size of responses to validate the functionality and accuracy of the results. We also included service layer tests to ensure business logic operates correctly, we achieved this by using mock objects to simulate the database and verify the correct behavior of the service layer.
 Our code is well commented to ensure good legibility and coordination with other team members and future developers, we use descriptive words as class/file names  and variable names.
 
 In terms of the frontend, we have a comprehensive error handling process and error messages for bug detection and user guidance.
