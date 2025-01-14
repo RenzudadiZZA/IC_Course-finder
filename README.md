@@ -98,7 +98,7 @@ We used GitHub issues to ensure that all features were comprehensively implement
 
 ## Version control
 
-We used github version control and created branches when developing. This improved our work efficiency and quality. The version v1.0.0 is the first version in which we implemented all the features required.(Search, filter, login, register, like, etc.) It is ostensibly fully functional. v1.1.0 is an optimized version in which we unified the frontend CSS files and made sure all the pages maintain a common style (Thank you Henry). This is also the first responsive version allowing users to comfortably browse modules on our platform across devices especially smartphones. v1.1.1 added some more Junit tests.
+We used github version control and created branches when developing. This improved our work efficiency and quality. The version v1.0.0 is the first version in which we implemented all the features required.(Search, filter, login, register, like, etc.) It is ostensibly fully functional. v1.1.0 is an optimized version in which we unified the frontend CSS files and made sure all the pages maintain a common style (Thank you Henry). This is also the first responsive version allowing users to comfortably browse modules on our platform across devices especially smartphones. v1.1.1 added some more Junit tests. v1.1.2 deleted back to list button on info page, this is the final version.
 
 ## Potential Improvement
 
